@@ -1,10 +1,10 @@
 import "./App.css";
-import TrainingRecords from "./components/TrainingRecords";
+import DistanceRecords from "./components/DistanceRecords";
 
 function App() {
   return (
     <>
-      <TrainingRecords />
+      <DistanceRecords />
     </>
   );
 }
