@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import DistanceForm from "./DistanceForm";
 import DistanceList, { Item, Items } from "./DistanceList";
 
@@ -26,10 +26,23 @@ const DistanceRecords = () => {
     }
   };
 
+  const handleClickDelete = (itemToDelete: Item) => {
+    const newItems = steps.items.filter(
+      (item) => item.date !== itemToDelete.date
+    );
+    setSteps({ items: newItems });
+  };
+
+  const handleClickEdit = () => {};
+
   return (
     <div className="distance-panel">
       <DistanceForm handleSubmit={handleSubmit} />
-      <DistanceList items={steps.items} />
+      <DistanceList
+        items={steps.items}
+        handleClickEdit={handleClickEdit}
+        handleClickDelete={handleClickDelete}
+      />
     </div>
   );
 };
