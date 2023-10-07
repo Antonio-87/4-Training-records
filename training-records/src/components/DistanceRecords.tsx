@@ -1,15 +1,16 @@
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 import DistanceForm from "./DistanceForm";
 import DistanceList, { Item, Items } from "./DistanceList";
 
 const DistanceRecords = () => {
   const [steps, setSteps] = useState<Items>({ items: [] });
+  let editItem;
 
   const handleSubmit = (item: Item) => {
     console.log(item.date, item.dist);
     if (steps.items.some((elem) => elem.date === item.date)) {
       const newSteps = steps.items.map((elem) => {
-        if (elem.date === elem.date) {
+        if (elem.date === item.date) {
           return {
             date: elem.date,
             dist: String(Number(elem.dist) + Number(item.dist)),
@@ -19,10 +20,13 @@ const DistanceRecords = () => {
       });
       setSteps({ items: newSteps });
     } else {
-      if (steps.items.some((elem) => elem.date > item.date))
+      if (steps.items.some((elem) => elem.date > item.date)) {
         setSteps((oldValue) => ({ items: [...oldValue.items, item] }));
-      if (steps.items.some((elem) => elem.date < item.date))
+      } else if (steps.items.some((elem) => elem.date < item.date)) {
         setSteps((oldValue) => ({ items: [item, ...oldValue.items] }));
+      } else {
+        setSteps({ items: [item] });
+      }
     }
   };
 
@@ -33,11 +37,13 @@ const DistanceRecords = () => {
     setSteps({ items: newItems });
   };
 
-  const handleClickEdit = () => {};
+  const handleClickEdit = (itemToEdit: Item) => {
+    editItem = itemToEdit;
+  };
 
   return (
     <div className="distance-panel">
-      <DistanceForm handleSubmit={handleSubmit} />
+      <DistanceForm handleSubmit={handleSubmit} editItem={editItem} />
       <DistanceList
         items={steps.items}
         handleClickEdit={handleClickEdit}

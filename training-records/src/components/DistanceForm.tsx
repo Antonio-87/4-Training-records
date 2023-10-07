@@ -1,13 +1,33 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Item } from "./DistanceList";
 
-type HandleSubmit = {
+const DistanceForm = ({
+  handleSubmit,
+  editItem,
+}: {
   handleSubmit: (item: Item) => void;
-};
+  editItem?: Item;
+}) => {
+  const [date, setDate] = useState<string>(editItem?.date || "");
+  const [dist, setDist] = useState<string>(editItem?.dist || "");
+  const inputDateElement = useRef<HTMLInputElement>(null);
+  const inputDistElement = useRef<HTMLInputElement>(null);
 
-const DistanceForm = ({ handleSubmit }: HandleSubmit) => {
-  const [date, setDate] = useState<string>("");
-  const [dist, setDist] = useState<string>("");
+  // if (editItem) {
+  //   if (inputDateElement.current) {
+  //     inputDateElement.current.value = editItem.date;
+  //   }
+  //   if (inputDistElement.current) {
+  //     inputDistElement.current.value = editItem.dist;
+  //   }
+  // }
+
+  useEffect(() => {
+    if (editItem) {
+      setDate(editItem.date);
+      setDist(editItem.dist);
+    }
+  }, [editItem]);
 
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,6 +42,7 @@ const DistanceForm = ({ handleSubmit }: HandleSubmit) => {
           type="date"
           id="date"
           onChange={(e) => setDate(e.target.value)}
+          ref={inputDateElement}
         />
       </div>
       <div className="input-box">
@@ -30,11 +51,16 @@ const DistanceForm = ({ handleSubmit }: HandleSubmit) => {
           type="number"
           id="distance"
           onChange={(e) => setDist(e.target.value)}
+          ref={inputDistElement}
         />
       </div>
       <input type="submit" id="ok" value={"OK"} />
     </form>
   );
+};
+
+DistanceForm.defaultProps = {
+  editItem: undefined,
 };
 
 export default DistanceForm;

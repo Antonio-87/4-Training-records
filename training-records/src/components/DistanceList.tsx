@@ -1,4 +1,4 @@
-import { MouseEventHandler, MouseEvent } from "react";
+import { MouseEventHandler } from "react";
 import formatDate from "../functions/formatDate";
 
 export type Item = {
@@ -16,7 +16,7 @@ const DistanceList = ({
   handleClickDelete,
 }: {
   items: Item[];
-  handleClickEdit: MouseEventHandler<HTMLDivElement>;
+  handleClickEdit: (item: Item) => void;
   handleClickDelete: (item: Item) => void;
 }) => {
   const handleDelete = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -25,6 +25,15 @@ const DistanceList = ({
     const itemToDelete = items.find((item) => item.date === date);
     if (itemToDelete) {
       handleClickDelete(itemToDelete);
+    }
+  };
+
+  const handleEdit = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+    const date = target.dataset.date;
+    const itemToEdit = items.find((item) => item.date === date);
+    if (itemToEdit) {
+      handleClickEdit(itemToEdit);
     }
   };
 
@@ -41,7 +50,11 @@ const DistanceList = ({
             <p className="step-date">{formatDate(el.date)}</p>
             <p className="step-distance">{el.dist}</p>
             <div className="step-actions">
-              <div onClick={handleClickEdit} className="icon-edit"></div>
+              <div
+                onClick={handleEdit}
+                className="icon-edit"
+                data-date={el.date}
+              ></div>
               <div
                 onClick={handleDelete}
                 className="icon-delete"
