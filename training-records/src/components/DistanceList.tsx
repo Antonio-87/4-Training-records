@@ -1,3 +1,5 @@
+import formatDate from "../functions/formatDate";
+
 export type Item = {
   date: string;
   dist: string;
@@ -18,7 +20,7 @@ const DistanceList = ({ items }: Items) => {
       <ul className="steps-list">
         {items.map((el, index) => (
           <li key={index} className="step">
-            <p className="step-date">{el.date}</p>
+            <p className="step-date">{formatDate(el.date)}</p>
             <p className="step-distance">{el.dist}</p>
             <div className="step-actions">
               <div className="icon-edit"></div>
@@ -26,7 +28,6 @@ const DistanceList = ({ items }: Items) => {
             </div>
           </li>
         ))}
-        ;
       </ul>
     </>
   );

@@ -5,7 +5,102 @@
   font-size: 20px;
 }
 
+.distance-panel {
+  position: absolute;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100px;
+}
+
+label {
+  margin-bottom: 15px;
+}
+
+input {
+  border: 1.5px solid rgb(36, 32, 32);
+  border-radius: 10px;
+  height: 80%;
+  font-size: 20px;
+}
+
+#date {
+  width: 80%;
+  padding: 5% 10%;
+}
+
+#distance {
+  width: 80%;
+  padding: 5% 10%;
+}
+
+#ok {
+  width: 15%;
+  background-color: white;
+  height: 60px;
+  margin-top: 6%;
+}
+
+.titles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 2% 3%;
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid rgb(36, 32, 32);
+  border-radius: 20px;
+  min-height: 100px;
+  padding: 5% 5%;
+}
+
+.step:nth-child(n + 2) {
+  margin-top: 5%;
+}
+
+.step {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.step-date {
+  margin: 0;
+}
+
+.step-distance {
+  margin: 0;
+}
+
+.step-actions {
+  display: flex;
+  width: 10%;
+  justify-content: space-between;
+}
+
 .icon-edit {
+  width: 15px;
+  height: 15px;
   background-image: url("../public/edit.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -13,26 +108,10 @@
 }
 
 .icon-delete {
+  width: 15px;
+  height: 15px;
   background-image: url("../public/delete.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 70%;
-  margin: 10% auto;
-}
-
-input {
-  position: relative;
-}
-
-label {
-  position: absolute;
-  top: 2%;
-  left: 2%;
 }

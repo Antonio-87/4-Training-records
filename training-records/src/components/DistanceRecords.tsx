@@ -24,10 +24,10 @@ const DistanceRecords = () => {
   };
 
   return (
-    <>
+    <div className="distance-panel">
       <DistanceForm handleSubmit={handleSubmit} />
       <DistanceList items={steps.items} />
-    </>
+    </div>
   );
 };
 

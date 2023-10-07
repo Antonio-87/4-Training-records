@@ -16,15 +16,23 @@ const DistanceForm = ({ handleSubmit }: HandleSubmit) => {
 
   return (
     <form onSubmit={onHandleSubmit}>
-      <label htmlFor="date">Дата(ДД.ММ.ГГ)</label>
-      <input type="date" id="date" onChange={(e) => setDate(e.target.value)} />
-      <label htmlFor="distance">Пройдено км</label>
-      <input
-        type="number"
-        id="distance"
-        onChange={(e) => setDist(e.target.value)}
-      />
-      <input type="submit" value={"OK"} />
+      <div className="input-box">
+        <label htmlFor="date">Дата(ДД.ММ.ГГ)</label>
+        <input
+          type="date"
+          id="date"
+          onChange={(e) => setDate(e.target.value)}
+        />
+      </div>
+      <div className="input-box">
+        <label htmlFor="distance">Пройдено км</label>
+        <input
+          type="number"
+          id="distance"
+          onChange={(e) => setDist(e.target.value)}
+        />
+      </div>
+      <input type="submit" id="ok" value={"OK"} />
     </form>
   );
 };
