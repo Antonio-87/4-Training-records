@@ -19,7 +19,10 @@ const DistanceRecords = () => {
       });
       setSteps({ items: newSteps });
     } else {
-      setSteps((oldValue) => ({ items: [...oldValue.items, item] }));
+      if (steps.items.some((elem) => elem.date > item.date))
+        setSteps((oldValue) => ({ items: [...oldValue.items, item] }));
+      if (steps.items.some((elem) => elem.date < item.date))
+        setSteps((oldValue) => ({ items: [item, ...oldValue.items] }));
     }
   };
 
