@@ -4,13 +4,16 @@ import DistanceList, { Item, Items } from "./DistanceList";
 
 const DistanceRecords = () => {
   const [steps, setSteps] = useState<Items>({ items: [] });
-  let editItem;
+  const [editItem, setEditItem] = useState<Item | null>(null);
 
   const handleSubmit = (item: Item) => {
     console.log(item.date, item.dist);
     if (steps.items.some((elem) => elem.date === item.date)) {
       const newSteps = steps.items.map((elem) => {
         if (elem.date === item.date) {
+          if (editItem) {
+            return item;
+          }
           return {
             date: elem.date,
             dist: String(Number(elem.dist) + Number(item.dist)),
@@ -21,13 +24,18 @@ const DistanceRecords = () => {
       setSteps({ items: newSteps });
     } else {
       if (steps.items.some((elem) => elem.date > item.date)) {
-        setSteps((oldValue) => ({ items: [...oldValue.items, item] }));
+        setSteps((oldValue) => ({
+          items: [...oldValue.items, item],
+        }));
       } else if (steps.items.some((elem) => elem.date < item.date)) {
-        setSteps((oldValue) => ({ items: [item, ...oldValue.items] }));
+        setSteps((oldValue) => ({
+          items: [item, ...oldValue.items],
+        }));
       } else {
         setSteps({ items: [item] });
       }
     }
+    setEditItem(null);
   };
 
   const handleClickDelete = (itemToDelete: Item) => {
@@ -38,7 +46,7 @@ const DistanceRecords = () => {
   };
 
   const handleClickEdit = (itemToEdit: Item) => {
-    editItem = itemToEdit;
+    setEditItem(itemToEdit);
   };
 
   return (

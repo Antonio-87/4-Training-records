@@ -6,26 +6,23 @@ const DistanceForm = ({
   editItem,
 }: {
   handleSubmit: (item: Item) => void;
-  editItem?: Item;
+  editItem: Item | null;
 }) => {
   const [date, setDate] = useState<string>(editItem?.date || "");
   const [dist, setDist] = useState<string>(editItem?.dist || "");
   const inputDateElement = useRef<HTMLInputElement>(null);
   const inputDistElement = useRef<HTMLInputElement>(null);
 
-  // if (editItem) {
-  //   if (inputDateElement.current) {
-  //     inputDateElement.current.value = editItem.date;
-  //   }
-  //   if (inputDistElement.current) {
-  //     inputDistElement.current.value = editItem.dist;
-  //   }
-  // }
-
   useEffect(() => {
     if (editItem) {
       setDate(editItem.date);
       setDist(editItem.dist);
+      if (inputDateElement.current) {
+        inputDateElement.current.value = editItem.date;
+      }
+      if (inputDistElement.current) {
+        inputDistElement.current.value = editItem.dist;
+      }
     }
   }, [editItem]);
 

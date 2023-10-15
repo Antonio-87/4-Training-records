@@ -1,4 +1,3 @@
-import { MouseEventHandler } from "react";
 import formatDate from "../functions/formatDate";
 
 export type Item = {
