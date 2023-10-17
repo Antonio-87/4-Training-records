@@ -7,6 +7,8 @@ function formatDate(timestamp: string) {
     return `0${day}.0${month}.${year}`;
   } else if (month < 10 && day >= 10) {
     return `${day}.0${month}.${year}`;
+  } else if (month >= 10 && day < 10) {
+    return `0${day}.${month}.${year}`;
   } else {
     return `${day}.${month}.${year} `;
   }

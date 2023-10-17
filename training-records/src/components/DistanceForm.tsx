@@ -6,7 +6,7 @@ const DistanceForm = ({
   editItem,
 }: {
   handleSubmit: (item: Item) => void;
-  editItem: Item | null;
+  editItem?: Item | null;
 }) => {
   const [date, setDate] = useState<string>(editItem?.date || "");
   const [dist, setDist] = useState<string>(editItem?.dist || "");
@@ -29,6 +29,12 @@ const DistanceForm = ({
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit({ date, dist });
+    if (inputDateElement.current) {
+      inputDateElement.current.value = "";
+    }
+    if (inputDistElement.current) {
+      inputDistElement.current.value = "";
+    }
   };
 
   return (

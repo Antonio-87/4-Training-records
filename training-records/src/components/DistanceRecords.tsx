@@ -23,17 +23,12 @@ const DistanceRecords = () => {
       });
       setSteps({ items: newSteps });
     } else {
-      if (steps.items.some((elem) => elem.date > item.date)) {
-        setSteps((oldValue) => ({
-          items: [...oldValue.items, item],
-        }));
-      } else if (steps.items.some((elem) => elem.date < item.date)) {
-        setSteps((oldValue) => ({
-          items: [item, ...oldValue.items],
-        }));
-      } else {
-        setSteps({ items: [item] });
-      }
+      const sortedItems = [...steps.items, item].sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB.getTime() - dateA.getTime();
+      });
+      setSteps({ items: sortedItems });
     }
     setEditItem(null);
   };
