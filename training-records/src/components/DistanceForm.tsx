@@ -28,12 +28,15 @@ const DistanceForm = ({
 
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleSubmit({ date, dist });
+    if (date !== "" && dist !== "") handleSubmit({ date, dist });
     if (inputDateElement.current) {
       inputDateElement.current.value = "";
+      setDate("");
     }
+
     if (inputDistElement.current) {
       inputDistElement.current.value = "";
+      setDist("");
     }
   };
 
